@@ -43,9 +43,17 @@ Summary-statistic checks only activate when the column header explicitly declare
 
 TableLint deliberately avoids claiming that a duplicated row or mixed decimal precision is scientifically wrong. Those cases are surfaced as information because they may be intentional.
 
-## Install from source
+## Install
 
 Requires Python 3.10+.
+
+The first public release is prepared for PyPI. After v0.1.0 is published:
+
+~~~bash
+pip install tablelint
+~~~
+
+### From source
 
 ~~~bash
 git clone https://github.com/coocoomaomao/TableLint.git
@@ -63,27 +71,10 @@ pytest
 
 ## Usage
 
-Check one CSV:
-
 ~~~bash
 tablelint check results.csv
-~~~
-
-Check one Excel workbook:
-
-~~~bash
 tablelint check results.xlsx
-~~~
-
-Check a LaTeX table file:
-
-~~~bash
 tablelint check tables.tex
-~~~
-
-Scan a directory recursively:
-
-~~~bash
 tablelint check tables/
 ~~~
 
@@ -113,6 +104,19 @@ Emit native GitHub Actions annotations:
 tablelint check tables/ --github-annotations
 ~~~
 
+### GitHub Actions
+
+Before the first tagged release, use `@main`:
+
+~~~yaml
+- uses: coocoomaomao/TableLint@main
+  with:
+    path: tables/
+    strict: "true"
+~~~
+
+After v0.1.0, pin the Action to `@v0.1.0`.
+
 See [GitHub Action usage](docs/GITHUB_ACTION.md).
 
 ## Exit codes
@@ -130,6 +134,13 @@ TableLint separates:
 3. **context-dependent signals** — duplicates and precision consistency.
 
 The third category stays informational by default. TableLint does not judge whether a reported mean, SD, SEM, CI width, or p-value is scientifically plausible.
+
+## Release
+
+The first public release is **v0.1.0**.
+
+- [v0.1.0 release notes](docs/releases/v0.1.0.md)
+- [Publishing guide](docs/PUBLISHING.md)
 
 ## Planned next
 

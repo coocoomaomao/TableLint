@@ -49,6 +49,7 @@ tablelint = "tablelint.cli:app"
 Homepage = "https://github.com/coocoomaomao/TableLint"
 Repository = "https://github.com/coocoomaomao/TableLint"
 Issues = "https://github.com/coocoomaomao/TableLint/issues"
+Changelog = "https://github.com/coocoomaomao/TableLint/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/tablelint"]
