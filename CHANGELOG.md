@@ -23,3 +23,7 @@
 - single-column confidence-interval syntax checks
 - confidence-interval bound-order checks
 - paired CI lower / upper column ordering checks
+- opt-in significance-star / exact p-value consistency checks
+- configurable significance-star thresholds
+- native GitHub Actions workflow annotations
+- reusable composite GitHub Action

@@ -28,6 +28,7 @@ Part of **喵造实验室 / MeowBuild Lab** and the Academic Lint family:
 - negative SD / SEM spread values
 - **confidence-interval syntax and bound ordering**
 - paired CI lower / upper column ordering
+- opt-in significance-star ↔ exact p-value consistency checks
 
 Summary-statistic checks only activate when the column header explicitly declares a combined representation such as `Mean ± SD` or `Mean (SEM)`. Confidence-interval checks only activate for headers that explicitly contain `CI` or `confidence interval`.
 
@@ -98,6 +99,22 @@ Machine-readable output:
 tablelint check tables/ --format json
 ~~~
 
+Enable a project-specific significance-star convention explicitly:
+
+~~~bash
+tablelint check results.csv --star-thresholds 0.05,0.01,0.001
+~~~
+
+The thresholds map to `*`, `**`, and `***` using strict `p < threshold` comparisons. Comparator p-values such as `<0.05` are skipped by this rule when they do not determine a unique star count.
+
+Emit native GitHub Actions annotations:
+
+~~~bash
+tablelint check tables/ --github-annotations
+~~~
+
+See [GitHub Action usage](docs/GITHUB_ACTION.md).
+
 ## Exit codes
 
 - `0`: no structural errors; warnings are allowed unless `--strict` is used
@@ -116,10 +133,8 @@ The third category stays informational by default. TableLint does not judge whet
 
 ## Planned next
 
-- significance-star vs p-value consistency
 - optional unit consistency
 - configurable missing-value policy
-- GitHub Actions annotations
 - ManuscriptLint integration
 
 ## License

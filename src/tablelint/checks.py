@@ -6,6 +6,7 @@ import re
 from typing import Any
 
 from .models import Finding, Severity, TableData
+from .significance import check_significance
 
 
 _PLACEHOLDERS = {"todo", "tbd", "???", "??", "fixme"}
@@ -136,7 +137,11 @@ def _ci_role(header: Any) -> str | None:
     return "interval"
 
 
-def check_table(table: TableData) -> list[Finding]:
+def check_table(
+    table: TableData,
+    *,
+    star_thresholds: tuple[Decimal, ...] | None = None,
+) -> list[Finding]:
     findings: list[Finding] = []
     width = _column_count(table)
 
@@ -419,5 +424,8 @@ def check_table(table: TableData) -> list[Finding]:
                         column=index + 1,
                     )
                 )
+
+    if star_thresholds:
+        findings.extend(check_significance(table, star_thresholds))
 
     return findings
