@@ -4,7 +4,7 @@ TableLint can run directly in GitHub Actions and emit native workflow annotation
 
 ## Basic use
 
-Until the first tagged release is published, use `@main`:
+Use the published release tag:
 
 ~~~yaml
 name: Table QA
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: coocoomaomao/TableLint@main
+      - uses: coocoomaomao/TableLint@v0.1.0
         with:
           path: tables/
           strict: "true"
@@ -30,7 +30,7 @@ jobs:
 Star conventions differ across journals and fields, so TableLint never assumes one. Enable the cross-check explicitly:
 
 ~~~yaml
-- uses: coocoomaomao/TableLint@main
+- uses: coocoomaomao/TableLint@v0.1.0
   with:
     path: tables/
     star-thresholds: "0.05,0.01,0.001"
