@@ -17,3 +17,9 @@
 - LaTeX tabular row-width diagnostics
 - strict mode and JSON output
 - Python 3.10–3.12 CI
+- header-declared Mean ± SD / SEM format checks
+- Mean (SD / SEM) format checks
+- negative SD / SEM spread detection
+- single-column confidence-interval syntax checks
+- confidence-interval bound-order checks
+- paired CI lower / upper column ordering checks

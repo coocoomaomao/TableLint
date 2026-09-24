@@ -21,13 +21,16 @@
 
 ## v0.2 — research-table intelligence
 
-- mean ± SD / SEM format checks
-- confidence interval syntax and ordering
-- significance-star consistency when both stars and numeric p-values are present
-- optional unit-consistency rules
-- configurable missing-value policy
-- GitHub Actions annotations
-- reusable GitHub Action
+- [x] mean ± SD / SEM format checks
+- [x] Mean (SD / SEM) format checks
+- [x] negative SD / SEM detection
+- [x] confidence interval syntax and ordering
+- [x] paired CI lower / upper ordering
+- [ ] significance-star consistency when both stars and numeric p-values are present
+- [ ] optional unit-consistency rules
+- [ ] configurable missing-value policy
+- [ ] GitHub Actions annotations
+- [ ] reusable GitHub Action
 
 ## v0.3 — Academic Lint integration
 
