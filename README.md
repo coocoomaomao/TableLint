@@ -11,7 +11,7 @@ Part of **喵造实验室 / MeowBuild Lab** and the Academic Lint family:
 - **TableLint** — table QA
 - **ManuscriptLint** — manuscript preflight
 
-## What v0.1 checks
+## Current checks
 
 ### CSV / XLSX
 
@@ -23,6 +23,13 @@ Part of **喵造实验室 / MeowBuild Lab** and the Academic Lint family:
 - explicit percentage values outside 0–100%
 - numeric p-values outside 0–1 in clearly named p-value columns
 - mixed decimal precision when one precision clearly dominates (informational)
+- **header-declared Mean ± SD / SEM formatting**
+- **header-declared Mean (SD / SEM) formatting**
+- negative SD / SEM spread values
+- **confidence-interval syntax and bound ordering**
+- paired CI lower / upper column ordering
+
+Summary-statistic checks only activate when the column header explicitly declares a combined representation such as `Mean ± SD` or `Mean (SEM)`. Confidence-interval checks only activate for headers that explicitly contain `CI` or `confidence interval`.
 
 ### LaTeX
 
@@ -31,6 +38,7 @@ Part of **喵造实验室 / MeowBuild Lab** and the Academic Lint family:
 - missing `tabular` inside a table
 - inconsistent simple row widths
 - standalone `tabular` environments
+- summary-statistic / CI cell checks when headers explicitly declare them
 
 TableLint deliberately avoids claiming that a duplicated row or mixed decimal precision is scientifically wrong. Those cases are surfaced as information because they may be intentional.
 
@@ -100,18 +108,17 @@ tablelint check tables/ --format json
 
 TableLint separates:
 
-1. **deterministic problems** — malformed/unreadable files and clearly invalid ranges,
-2. **likely formatting issues** — empty headers, placeholders, LaTeX structure,
+1. **deterministic problems** — malformed/unreadable files, impossible ranges, reversed CI bounds, negative SD/SEM,
+2. **likely formatting issues** — empty headers, placeholders, declared summary-statistic/CI syntax mismatches, LaTeX structure,
 3. **context-dependent signals** — duplicates and precision consistency.
 
-The third category stays informational by default.
+The third category stays informational by default. TableLint does not judge whether a reported mean, SD, SEM, CI width, or p-value is scientifically plausible.
 
 ## Planned next
 
-- mean ± SD / SEM formatting
-- confidence interval checks
 - significance-star vs p-value consistency
 - optional unit consistency
+- configurable missing-value policy
 - GitHub Actions annotations
 - ManuscriptLint integration
 
