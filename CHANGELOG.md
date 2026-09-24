@@ -1,6 +1,16 @@
 # Changelog
 
+All notable changes to TableLint will be documented in this file.
+
 ## [Unreleased]
+
+### Planned
+- optional unit-consistency rules
+- configurable missing-value policy
+- ManuscriptLint orchestration
+- source-backed publisher table presets
+
+## [0.1.0] - 2026-09-25
 
 ### Added
 - initial TableLint CLI
@@ -27,3 +37,8 @@
 - configurable significance-star thresholds
 - native GitHub Actions workflow annotations
 - reusable composite GitHub Action
+- wheel / sdist build validation
+- PyPI Trusted Publishing workflow
+
+[Unreleased]: https://github.com/coocoomaomao/TableLint/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/coocoomaomao/TableLint/releases/tag/v0.1.0
