@@ -1,5 +1,13 @@
 # TableLint 🐈‍⬛📊
 
+<p>
+  <a href="https://pypi.org/project/tablelint/"><img src="https://img.shields.io/pypi/v/tablelint" alt="PyPI"></a>
+  <a href="https://github.com/coocoomaomao/TableLint/releases/tag/v0.1.0"><img src="https://img.shields.io/github/v/release/coocoomaomao/TableLint" alt="GitHub release"></a>
+  <a href="https://github.com/coocoomaomao/TableLint/actions/workflows/ci.yml"><img src="https://github.com/coocoomaomao/TableLint/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/pypi/pyversions/tablelint" alt="Python versions">
+  <img src="https://img.shields.io/github/license/coocoomaomao/TableLint" alt="MIT License">
+</p>
+
 > **ESLint for academic tables.**
 
 **TableLint** is an open-source linter for academic tables. It helps researchers catch deterministic data-quality and formatting problems before submission.
@@ -47,10 +55,16 @@ TableLint deliberately avoids claiming that a duplicated row or mixed decimal pr
 
 Requires Python 3.10+.
 
-The first public release is prepared for PyPI. After v0.1.0 is published:
+### PyPI
 
 ~~~bash
 pip install tablelint
+~~~
+
+Verify the installation:
+
+~~~bash
+tablelint --help
 ~~~
 
 ### From source
@@ -106,16 +120,14 @@ tablelint check tables/ --github-annotations
 
 ### GitHub Actions
 
-Before the first tagged release, use `@main`:
+Pin the Action to the published release:
 
 ~~~yaml
-- uses: coocoomaomao/TableLint@main
+- uses: coocoomaomao/TableLint@v0.1.0
   with:
     path: tables/
     strict: "true"
 ~~~
-
-After v0.1.0, pin the Action to `@v0.1.0`.
 
 See [GitHub Action usage](docs/GITHUB_ACTION.md).
 
@@ -137,8 +149,10 @@ The third category stays informational by default. TableLint does not judge whet
 
 ## Release
 
-The first public release is **v0.1.0**.
+The first public release, **TableLint v0.1.0**, is now available.
 
+- [PyPI package](https://pypi.org/project/tablelint/)
+- [GitHub release](https://github.com/coocoomaomao/TableLint/releases/tag/v0.1.0)
 - [v0.1.0 release notes](docs/releases/v0.1.0.md)
 - [Publishing guide](docs/PUBLISHING.md)
 
