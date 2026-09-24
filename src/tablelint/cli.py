@@ -8,10 +8,12 @@ from rich.console import Console
 from rich.table import Table
 
 from .checks import check_table
+from .github_annotations import emit_annotations
 from .discovery import collect_table_files
 from .models import Severity
 from .readers import read_file
 from .reporting import json_report, summarize
+from .significance import parse_star_thresholds
 
 
 app = typer.Typer(
@@ -45,11 +47,36 @@ def check(
         "--format",
         help="Output format: text or json.",
     ),
+    star_thresholds: str = typer.Option(
+        "",
+        "--star-thresholds",
+        help=(
+            "Opt in to p-value/significance-star consistency checks with "
+            "descending thresholds, e.g. 0.05,0.01,0.001."
+        ),
+    ),
+    github_annotations: bool = typer.Option(
+        False,
+        "--github-annotations",
+        help="Emit native GitHub Actions workflow annotations.",
+    ),
 ) -> None:
     """Check one table file or recursively scan a directory."""
     output_format = output_format.lower()
     if output_format not in {"text", "json"}:
         raise typer.BadParameter("--format must be 'text' or 'json'.")
+    if output_format == "json" and github_annotations:
+        raise typer.BadParameter(
+            "--format json cannot be combined with --github-annotations "
+            "because annotations would make stdout invalid JSON."
+        )
+
+    thresholds = None
+    if star_thresholds.strip():
+        try:
+            thresholds = parse_star_thresholds(star_thresholds)
+        except ValueError as exc:
+            raise typer.BadParameter(str(exc), param_hint="--star-thresholds") from exc
 
     files = collect_table_files(target)
     if not files:
@@ -64,7 +91,7 @@ def check(
         findings.extend(result.findings)
         table_count += len(result.tables)
         for table_data in result.tables:
-            findings.extend(check_table(table_data))
+            findings.extend(check_table(table_data, star_thresholds=thresholds))
 
     counts = summarize(findings)
 
@@ -82,6 +109,9 @@ def check(
             )
         )
     else:
+        if github_annotations:
+            emit_annotations(findings)
+
         report = Table(title="TableLint")
         report.add_column("File", overflow="fold")
         report.add_column("Table", no_wrap=True)

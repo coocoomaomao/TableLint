@@ -26,11 +26,11 @@
 - [x] negative SD / SEM detection
 - [x] confidence interval syntax and ordering
 - [x] paired CI lower / upper ordering
-- [ ] significance-star consistency when both stars and numeric p-values are present
+- [x] opt-in significance-star consistency for exact numeric p-values
 - [ ] optional unit-consistency rules
 - [ ] configurable missing-value policy
-- [ ] GitHub Actions annotations
-- [ ] reusable GitHub Action
+- [x] GitHub Actions annotations
+- [x] reusable GitHub Action
 
 ## v0.3 — Academic Lint integration
 
